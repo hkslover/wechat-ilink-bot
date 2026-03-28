@@ -9,7 +9,7 @@ description = "Python SDK for WeChat iLink Bot API — send and receive WeChat m
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
-authors = [{ name = "wechat-bot contributors" }]
+authors = [{ name = "hkslover" }]
 keywords = ["wechat", "bot", "ilink", "weixin", "sdk"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -67,9 +67,20 @@ Homepage = "https://github.com/hkslover/wechat-ilink-bot"
 Repository = "https://github.com/hkslover/wechat-ilink-bot"
 Issues = "https://github.com/hkslover/wechat-ilink-bot/issues"
 Documentation = "https://wechat-ilink-bot.readthedocs.io/en/latest/"
+Changelog = "https://github.com/hkslover/wechat-ilink-bot/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/wechat_bot"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    ".github/**",
+    ".pytest_cache/**",
+    ".ruff_cache/**",
+    "plans/**",
+    "tests/**",
+    "tencent-weixin:openclaw-weixin/**",
+]
 
 [tool.hatch.version]
 path = "src/wechat_bot/_version.py"

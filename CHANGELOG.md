@@ -9,23 +9,39 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
-- GitHub Actions CI workflow for lint, tests, build, and package checks.
-- Contributing guide and security policy documentation.
-- Additional tests for polling/session behavior, storage security behavior, client config caching,
-  auth flow smoke, context behavior smoke, and examples import smoke.
-- Webhook extension with one-command startup and GET/POST `/send` API.
-- CLI command `wechat-bot webhook` for URL-triggered text sending.
-
-### Changed
-
-- Storage writes now use atomic replacement and tightened file/directory permissions where supported.
-- `current_user.json` no longer stores token by default.
-- Polling session-expiry handling now prefers explicit recovery and clear failure signaling.
-- Version source unified via `src/wechat_bot/_version.py`.
-- README and examples reorganized for open-source onboarding.
+- Placeholder for upcoming changes.
 
 ## [0.1.0] - 2026-03-28
 
 ### Added
 
-- Initial public SDK release with QR login, long polling, text/media send, and media download.
+- Initial public release of `wechat-ilink-bot`.
+- QR login flow with local credential persistence.
+- Long-polling runtime with handler registration and first-match dispatch model.
+- Proactive send APIs:
+  - `send_text`
+  - `send_image`
+  - `send_video`
+  - `send_file`
+- Message-context reply APIs:
+  - `reply`
+  - `reply_image`
+  - `reply_video`
+  - `reply_file`
+  - `send_typing`
+- Media upload and download helpers.
+- Webhook server (`/healthz`, `/send`) with API key support.
+- CLI command: `wechat-bot webhook`.
+- Owner-default recipient behavior with explicit `to` override support.
+- Account switching and local account listing support.
+- Read the Docs documentation scaffold (`MkDocs + mkdocstrings`).
+- CI/testing/lint/build packaging checks.
+
+### Changed
+
+- Unified package version source in `src/wechat_bot/_version.py`.
+- Standardized webhook response format:
+  - success: `{"status": 200}`
+  - error: `{"status": <code>, "detail": "..."}`
+- Improved recipient resolution and error clarity for missing owner state.
+- Improved local storage safety with atomic JSON writes and strict file permissions when supported.
