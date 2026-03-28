@@ -1,6 +1,6 @@
 site_name: wechat-ilink-bot
 site_description: Python SDK for WeChat iLink Bot API
-site_url: https://wechat-ilink-bot.readthedocs.io/
+site_url: https://wechat-ilink-bot.readthedocs.io/en/latest/
 repo_url: https://github.com/hkslover/wechat-ilink-bot
 repo_name: hkslover/wechat-ilink-bot
 
@@ -32,8 +32,11 @@ markdown_extensions:
 
 nav:
   - 首页: index.md
+  - 安装: installation.md
   - 快速开始: getting-started.md
   - Webhook: webhook.md
+  - Examples: examples.md
+  - FAQ: faq.md
   - API:
       - Bot: api/bot.md
       - MessageContext: api/context.md

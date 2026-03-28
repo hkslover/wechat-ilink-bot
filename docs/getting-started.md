@@ -1,33 +1,65 @@
 # 快速开始
 
-## 安装
+## 1) 扫码登录
 
-```bash
-pip install wechat-ilink-bot
+```python
+import asyncio
+
+from wechat_bot import Bot
+
+
+async def main() -> None:
+    bot = Bot(use_current_user=False)
+    result = await bot.login()
+    print("Login successful.")
+    print(f"account_id = {result.account_id}")
+    print(f"user_id    = {result.user_id}")
+    await bot.stop()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 
-可选：
+## 2) 最小 Echo Bot
 
-```bash
-pip install "wechat-ilink-bot[webhook]"
+```python
+from wechat_bot import Bot, Filter
+
+bot = Bot()
+
+
+@bot.on_message(Filter.text())
+async def echo(ctx):
+    await ctx.reply(f"Echo: {ctx.text}")
+
+
+if __name__ == "__main__":
+    bot.run()
 ```
 
-## 第一步：扫码登录
+## 3) 主动发送文本
 
-```bash
-python examples/login_bot.py
+```python
+import asyncio
+
+from wechat_bot import Bot
+
+
+async def main() -> None:
+    bot = Bot()
+
+    # owner-default（不传 to）
+    await bot.send_text(text="Hello from wechat-ilink-bot!")
+
+    # 显式目标（需要时）
+    # await bot.send_text(to="o9xxx@im.wechat", text="Hello")
+
+    await bot.stop()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 
-## 第二步：运行 Echo Bot
-
-```bash
-python examples/echo_bot.py
-```
-
-## 第三步：主动发送
-
-```bash
-python examples/proactive_send.py
-```
-
-如果不传 `to`，SDK 会优先尝试 owner-default 收件人（登录账号对应用户）。
+> `to` 不传时会走 owner-default；传了 `to` 则显式目标优先。

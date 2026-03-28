@@ -4,10 +4,26 @@
 
 支持扫码登录、长轮询收消息、文本/图片/视频/文件发送，以及一键 webhook 发送。
 
+<p>
+  <a href="https://wechat-ilink-bot.readthedocs.io/en/latest/" target="_blank">
+    <strong>Read the Docs: https://wechat-ilink-bot.readthedocs.io/en/latest/</strong>
+  </a>
+</p>
+
 ## 安装
+
+PyPI 安装：
 
 ```bash
 pip install wechat-ilink-bot
+```
+
+源码安装（开发/调试推荐）：
+
+```bash
+git clone https://github.com/hkslover/wechat-ilink-bot.git
+cd wechat-ilink-bot
+pip install -e .
 ```
 
 可选依赖：
@@ -22,31 +38,75 @@ pip install "wechat-ilink-bot[webhook]"
 
 ## 快速开始
 
-1. 首次登录（扫码）：
+### 1) 扫码登录并持久化账号
 
-```bash
-python examples/login_bot.py
+```python
+import asyncio
+
+from wechat_bot import Bot
+
+
+async def main() -> None:
+    bot = Bot(use_current_user=False)
+    result = await bot.login()
+    print(f"login ok: account_id={result.account_id}, user_id={result.user_id}")
+    await bot.stop()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 
-2. 启动最小 Echo Bot：
+### 2) 最小 Echo Bot
 
-```bash
-python examples/echo_bot.py
+```python
+from wechat_bot import Bot, Filter
+
+bot = Bot()
+
+
+@bot.on_message(Filter.text())
+async def echo(ctx):
+    await ctx.reply(f"Echo: {ctx.text}")
+
+
+if __name__ == "__main__":
+    bot.run()
 ```
 
-3. 主动发送消息：
+### 3) 主动发送（owner-default 或显式目标）
 
-```bash
-python examples/proactive_send.py
+```python
+import asyncio
+
+from wechat_bot import Bot
+
+
+async def main() -> None:
+    bot = Bot()
+
+    # owner-default（不传 to）
+    await bot.send_text(text="Hello from wechat-ilink-bot!")
+
+    # 或者显式目标
+    # await bot.send_text(to="o9xxx@im.wechat", text="Hello")
+
+    await bot.stop()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 
-## Webhook 一键启动
+## Webhook 快速使用
+
+启动：
 
 ```bash
 wechat-bot webhook --api-key your-secret
 ```
 
-发送示例：
+请求示例：
 
 ```bash
 # GET
@@ -59,21 +119,19 @@ curl -X POST "http://127.0.0.1:8787/send" \
   -d '{"text":"hello from webhook"}'
 ```
 
-## 示例目录
+## Examples
 
-- `examples/login_bot.py`：扫码登录
-- `examples/echo_bot.py`：最小回声机器人
-- `examples/command_bot.py`：命令式 handler
-- `examples/media_bot.py`：媒体下载
-- `examples/proactive_send.py`：主动发送
-- `examples/account_switch.py`：账号切换发送
-- `examples/webhook_server.py`：本地 webhook 服务
+更多完整脚本请查看：
 
-## 文档
+- [examples/login_bot.py](examples/login_bot.py)
+- [examples/echo_bot.py](examples/echo_bot.py)
+- [examples/command_bot.py](examples/command_bot.py)
+- [examples/media_bot.py](examples/media_bot.py)
+- [examples/proactive_send.py](examples/proactive_send.py)
+- [examples/account_switch.py](examples/account_switch.py)
+- [examples/webhook_server.py](examples/webhook_server.py)
 
-文档已迁移到 `docs/`（`MkDocs + Read the Docs` 结构）。
-
-本地预览：
+## 本地文档预览
 
 ```bash
 pip install -r docs/requirements.txt
