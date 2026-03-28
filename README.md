@@ -7,10 +7,10 @@
 ## 核心能力
 
 - 收消息：长轮询 + handler
-- 发文字：`send_text`
-- 发图片：`send_image`
-- 发视频：`send_video`
-- 发文件：`send_file`
+- 主动发送文本：`send_text`
+- 主动发送图片/视频/文件：`send_image` / `send_video` / `send_file`
+- 会话内回复文本：`ctx.reply`
+- 会话内回复图片/视频/文件：`ctx.reply_image` / `ctx.reply_video` / `ctx.reply_file`
 - Webhook 触发发送（当前为文本）
 
 <p>
@@ -107,7 +107,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### 4) 发送图片 / 视频 / 文件
+### 4) 主动发送富媒体（图片 / 视频 / 文件）
 
 ```python
 import asyncio
@@ -131,6 +131,33 @@ async def main() -> None:
 
 if __name__ == "__main__":
     asyncio.run(main())
+```
+
+### 5) 会话内回复富媒体（ctx.reply_*）
+
+```python
+from wechat_bot import Bot, Filter
+
+bot = Bot()
+
+
+@bot.on_message(Filter.text_startswith("/image"))
+async def reply_image(ctx):
+    await ctx.reply_image("/path/to/image.png", caption="image")
+
+
+@bot.on_message(Filter.text_startswith("/video"))
+async def reply_video(ctx):
+    await ctx.reply_video("/path/to/video.mp4", caption="video")
+
+
+@bot.on_message(Filter.text_startswith("/file"))
+async def reply_file(ctx):
+    await ctx.reply_file("/path/to/file.pdf", caption="file")
+
+
+if __name__ == "__main__":
+    bot.run()
 ```
 
 ## Webhook 快速使用

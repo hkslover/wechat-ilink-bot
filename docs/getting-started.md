@@ -64,7 +64,7 @@ if __name__ == "__main__":
 
 > `to` 不传时会走 owner-default；传了 `to` 则显式目标优先。
 
-## 4) 主动发送图片 / 视频 / 文件
+## 4) 主动发送富媒体（图片 / 视频 / 文件）
 
 ```python
 import asyncio
@@ -91,3 +91,32 @@ if __name__ == "__main__":
 ```
 
 你也可以参考完整脚本：`examples/proactive_send.py`。
+
+## 5) 会话内回复富媒体（ctx.reply_*）
+
+```python
+from wechat_bot import Bot, Filter
+
+bot = Bot()
+
+
+@bot.on_message(Filter.text_startswith("/image"))
+async def reply_image(ctx):
+    await ctx.reply_image("/path/to/image.png", caption="image")
+
+
+@bot.on_message(Filter.text_startswith("/video"))
+async def reply_video(ctx):
+    await ctx.reply_video("/path/to/video.mp4", caption="video")
+
+
+@bot.on_message(Filter.text_startswith("/file"))
+async def reply_file(ctx):
+    await ctx.reply_file("/path/to/file.pdf", caption="file")
+
+
+if __name__ == "__main__":
+    bot.run()
+```
+
+更多说明见：[消息发送能力](message-delivery.md)。
