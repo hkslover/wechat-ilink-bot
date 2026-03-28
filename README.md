@@ -71,8 +71,14 @@ curl -X POST "http://127.0.0.1:8787/send" \
 
 ## 文档
 
-README 保持简洁。  
-更完整的使用说明和 API 文档会放在后续 `docs/`。
+文档已迁移到 `docs/`（`MkDocs + Read the Docs` 结构）。
+
+本地预览：
+
+```bash
+pip install -r docs/requirements.txt
+mkdocs serve
+```
 
 ## 参与贡献
 

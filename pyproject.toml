@@ -53,9 +53,9 @@ dev = [
 wechat-bot = "wechat_bot.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/wechat-ilink-bot/wechat-ilink-bot"
-Repository = "https://github.com/wechat-ilink-bot/wechat-ilink-bot"
-Issues = "https://github.com/wechat-ilink-bot/wechat-ilink-bot/issues"
+Homepage = "https://github.com/hkslover/wechat-ilink-bot"
+Repository = "https://github.com/hkslover/wechat-ilink-bot"
+Issues = "https://github.com/hkslover/wechat-ilink-bot/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/wechat_bot"]

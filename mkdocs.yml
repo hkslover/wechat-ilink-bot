@@ -1,0 +1,40 @@
+site_name: wechat-ilink-bot
+site_description: Python SDK for WeChat iLink Bot API
+site_url: https://wechat-ilink-bot.readthedocs.io/
+repo_url: https://github.com/hkslover/wechat-ilink-bot
+repo_name: hkslover/wechat-ilink-bot
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.instant
+    - navigation.sections
+    - content.code.copy
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - src
+          options:
+            show_source: false
+            show_root_heading: true
+            show_signature_annotations: true
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+
+nav:
+  - 首页: index.md
+  - 快速开始: getting-started.md
+  - Webhook: webhook.md
+  - API:
+      - Bot: api/bot.md
+      - MessageContext: api/context.md
+      - Webhook Helpers: api/webhook.md
