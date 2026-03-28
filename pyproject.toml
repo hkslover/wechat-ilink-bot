@@ -1,0 +1,81 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wechat-ilink-bot"
+dynamic = ["version"]
+description = "Python SDK for WeChat iLink Bot API — send and receive WeChat messages programmatically."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "wechat-bot contributors" }]
+keywords = ["wechat", "bot", "ilink", "weixin", "sdk"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Communications :: Chat",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+    "Framework :: AsyncIO",
+]
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2.0",
+    "cryptography>=42.0",
+]
+
+[project.optional-dependencies]
+qrcode = ["qrcode[pil]"]
+socks = ["httpx[socks]"]
+webhook = [
+    "fastapi>=0.111",
+    "uvicorn>=0.30",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "mypy>=1.10",
+    "ruff>=0.5",
+    "build>=1.0",
+    "twine>=6.0",
+    "fastapi>=0.111",
+    "uvicorn>=0.30",
+]
+
+[project.scripts]
+wechat-bot = "wechat_bot.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/wechat-ilink-bot/wechat-ilink-bot"
+Repository = "https://github.com/wechat-ilink-bot/wechat-ilink-bot"
+Issues = "https://github.com/wechat-ilink-bot/wechat-ilink-bot/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wechat_bot"]
+
+[tool.hatch.version]
+path = "src/wechat_bot/_version.py"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
