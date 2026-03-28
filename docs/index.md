@@ -13,9 +13,10 @@
 
 1. [安装](installation.md)
 2. [快速开始](getting-started.md)
-3. [Webhook](webhook.md)
-4. [Examples](examples.md)
-5. [API 文档](api/bot.md)
+3. [媒体发送](media.md)
+4. [Webhook](webhook.md)
+5. [Examples](examples.md)
+6. [API 文档](api/bot.md)
 
 ## 在线文档
 

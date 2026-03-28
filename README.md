@@ -4,6 +4,15 @@
 
 支持扫码登录、长轮询收消息、文本/图片/视频/文件发送，以及一键 webhook 发送。
 
+## 核心能力
+
+- 收消息：长轮询 + handler
+- 发文字：`send_text`
+- 发图片：`send_image`
+- 发视频：`send_video`
+- 发文件：`send_file`
+- Webhook 触发发送（当前为文本）
+
 <p>
   <a href="https://wechat-ilink-bot.readthedocs.io/en/latest/" target="_blank">
     <strong>Read the Docs: https://wechat-ilink-bot.readthedocs.io/en/latest/</strong>
@@ -98,6 +107,32 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+### 4) 发送图片 / 视频 / 文件
+
+```python
+import asyncio
+
+from wechat_bot import Bot
+
+
+async def main() -> None:
+    bot = Bot()
+
+    # owner-default（不传 to）
+    await bot.send_image(file_path="/path/to/image.png", caption="image")
+    await bot.send_video(file_path="/path/to/video.mp4", caption="video")
+    await bot.send_file(file_path="/path/to/file.pdf", caption="file")
+
+    # 显式目标（需要时）
+    # await bot.send_image(to="o9xxx@im.wechat", file_path="/path/to/image.png")
+
+    await bot.stop()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
 ## Webhook 快速使用
 
 启动：
@@ -118,6 +153,9 @@ curl -X POST "http://127.0.0.1:8787/send" \
   -H "X-Webhook-Key: your-secret" \
   -d '{"text":"hello from webhook"}'
 ```
+
+> Webhook `/send` 当前用于发送文本。  
+> 图片/视频/文件发送请使用 `Bot.send_image` / `Bot.send_video` / `Bot.send_file`。
 
 ## Examples
 

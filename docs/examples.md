@@ -15,5 +15,6 @@
 1. `login_bot.py`
 2. `echo_bot.py`
 3. `command_bot.py`
-4. `proactive_send.py`
-5. `webhook_server.py`
+4. `proactive_send.py`（包含文本/图片/视频/文件主动发送）
+5. `media_bot.py`（接收媒体并下载）
+6. `webhook_server.py`

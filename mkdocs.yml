@@ -34,6 +34,7 @@ nav:
   - 首页: index.md
   - 安装: installation.md
   - 快速开始: getting-started.md
+  - 媒体发送: media.md
   - Webhook: webhook.md
   - Examples: examples.md
   - FAQ: faq.md

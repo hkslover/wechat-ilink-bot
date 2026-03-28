@@ -14,6 +14,16 @@ SDK 支持 owner-default。
 - 成功：`{"status": 200}`
 - 失败：`{"status": <4xx/5xx>, "detail": "..."}`
 
+## Bot 可以发送图片、视频和文件吗？
+
+可以，分别使用：
+
+- `send_image(file_path=...)`
+- `send_video(file_path=...)`
+- `send_file(file_path=...)`
+
+如需指定收件人，传入 `to=...`；不传则走 owner-default。
+
 ## 想看完整 API 怎么办？
 
 查看左侧 API 文档，或直接访问：

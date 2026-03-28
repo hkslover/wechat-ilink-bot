@@ -1,5 +1,8 @@
 # Webhook
 
+> 当前 Webhook `/send` 接口用于发送文本消息。  
+> 图片/视频/文件发送请使用 `Bot.send_image` / `Bot.send_video` / `Bot.send_file`。
+
 ## 启动服务
 
 ```bash

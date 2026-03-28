@@ -63,3 +63,31 @@ if __name__ == "__main__":
 ```
 
 > `to` 不传时会走 owner-default；传了 `to` 则显式目标优先。
+
+## 4) 主动发送图片 / 视频 / 文件
+
+```python
+import asyncio
+
+from wechat_bot import Bot
+
+
+async def main() -> None:
+    bot = Bot()
+
+    # owner-default 发送
+    await bot.send_image(file_path="/path/to/image.png", caption="image")
+    await bot.send_video(file_path="/path/to/video.mp4", caption="video")
+    await bot.send_file(file_path="/path/to/file.pdf", caption="file")
+
+    # 显式指定收件人
+    # await bot.send_file(to="o9xxx@im.wechat", file_path="/path/to/file.pdf")
+
+    await bot.stop()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+你也可以参考完整脚本：`examples/proactive_send.py`。
